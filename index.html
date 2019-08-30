@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+	<!--<div id="nextbtn">
+				<img src="img/nextbtn.PNG"/>
+			</div>-->
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/main.css" />
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			#bg {
+				width: 800px;
+				height: 600px;
+				background: url(img/bg4.png);
+				background-size: cover;
+				margin: 0 auto;
+				margin-top: 100px;
+				position: relative;
+			}
+			#stbg{
+				overflow: hidden;
+			}
+			#move {
+				position: absolute;
+				left: 300px;
+				top: 10px;
+				width: 340px;
+				margin: 10px 0px;
+				font-size: 28px;
+			}
+			
+			#songbtn {
+				position: absolute;
+				left: -220px;
+				top: -280px;
+			}
+			
+			#startbtn {
+				position: absolute;
+				left: 30px;
+				top: 190px;
+			}
+			#gamebg{
+				position: relative;
+				width: 800px;
+				height: 600px;
+				background: url(img/bg3.jpg) no-repeat;
+				background-size: cover;
+				margin: 0 auto;
+				margin-top: 80px;
+				display:none;
+			}
+			#ren{
+				position: absolute;
+				top: 130px;
+				right: 0;
+			}
+			#ren img:nth-child(2){
+				position: absolute;
+				top: 203px;
+				left: 98px;
+			}
+			#qunzi{
+				width: 200px;
+				height: 150px;
+				position: absolute;
+				top: 0;
+			}
+			#qunzi img{
+				position: absolute;
+			}
+			#q1{
+				position: absolute;
+				top:20px;
+			}
+			#q2{
+				position: absolute;
+				top:165px;
+				left: 214px;
+			}
+			#q3{
+				position: absolute;
+				top:23px;
+				left: 141px;
+			}
+			#q4{
+				position: absolute;
+				top:181px;
+			}
+			#q5{
+				position: absolute;
+				top:230px;
+				left:350px;
+			}
+			#q6{
+				position: absolute;
+				top:300px;
+				left:50px;
+			}
+				#q7{
+				position: absolute;
+				top:300px;
+				left:220px;
+			}
+				#q8{
+				position: absolute;
+				top:400px;
+				left:220px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--开始页面-->
+		<div id="bg">
+			<!--歌曲按钮-->
+			<div id="songbtn">
+				<img src="img/songbtn.PNG" />
+				<audio id="music" loop="loop" autoplay="autoplay">
+					<source src="song.mp3" type="audio/mp3" />
+				</audio>
+			</div>
+			
+			
+			<div id="stbg" style="position: relative;height: 600px;">
+				<div id="move">
+					赶紧来为小花仙子换装吧！
+				</div>
+			<!--人-->
+			<div id="people">
+				<img src="img/player1.png" class="pe"id="show" />
+			</div>
+			<!--开始按钮-->
+			<div id="startbtn" ">
+				<img src="img/startbtn.png"  style="cursor:pointer;"/> 
+			</div>
+			<!--进度条-->
+			 <div id="progress" style="position:absolute;bottom:230px;width:200px;background:pink;display: none;">
+        		<p style="font-size:26px;">玩命加载中......</p> 
+        	</div>
+			
+			</div>
+			
+			
+			
+			<div id="gamebg">
+					<div id="ren">
+						
+				<img src="img/zhu.png" />
+				<img src="" id="myimg" />
+			</div>
+			<div id="qunzi">
+			<div id="q1">
+				<img src="img/1.png"/>
+			</div>
+			<div id="q2">
+				<img src="img/2.png" />
+			</div>
+			<div id="q3">
+				<img src="img/3.png" />
+			</div>
+			<div id="q4">
+				<img src="img/4.png" />
+			</div>
+			<div id="q5">
+				<img src="img/5.png" />
+			</div>
+			<div id="q6">
+				<img src="img/6.png" />
+			</div>
+			<div id="q7">
+				<img src="img/7.png" />
+			</div>
+			<div id="q8">
+				<img src="img/8.png" />
+			</div>
+			<button id="res" style="width: 100px;height:50px;margin-top: 460px;margin-left: 80px;">重置</button>
+		</div>
+			</div>
+	</div>
+	
+       
+        
+		<script type="text/javascript">
+			var bg = document.getElementById('bg');
+			var stbg = document.getElementById('stbg');
+			var move = document.getElementById('move');
+			var gamebg = document.getElementById('gamebg');
+			var qunzi = document.getElementById('qunzi');
+			var myimg = document.getElementById('myimg');
+			var aQun = qunzi.getElementsByTagName('div');
+			var show = document.getElementById('show');
+			var res = document.getElementById('res');
+			var progress = document.getElementById("progress");
+			
+			var speed = 1;
+			var index =1;
+			
+			var timer = setInterval(function(){
+				speed<800?speed+=2:speed=-340;	
+				move.style.left = speed + 'px';
+			},30);
+			
+			var timer1 = setInterval(function(){
+				index<3?index++:index=1;	
+				show.src = "img/player"+index+".png";
+			},500);
+			
+			stbg.onclick = function(){
+				clearInterval(timer);
+				clearInterval(timer1);
+				progress.style.display = 'block';
+				var timer2 = setInterval(function(){
+					if(progress.offsetWidth<800)
+						progress.style.width = progress.offsetWidth + 30 + 'px';
+					else{
+					stbg.style.display = "none";
+						gamebg.style.display = "block";
+						clearInterval(timer2);
+					}
+				},300)
+//				gamebg.style.display = "block";
+				
+			}
+			
+			res.onclick = function(){
+				myimg.src = '';
+			}
+			!function(){
+				for(var i=0,len=aQun.length;i<len;i++ ){
+					aQun[i].i = i+1 ;
+					aQun[i].onmousedown = function(ev){
+						var oDiv = document.createElement('div');
+						oDiv.style.position = 'absolute';
+						oDiv.style.left = ev.pageX - bg.offsetLeft - 71 + 'px';
+						oDiv.style.top = ev.pageY - bg.offsetTop -61 + 'px';
+						var newImg = new Image();
+						newImg.src = 'img/'+this.i+'.png';
+						oDiv.appendChild(newImg);
+						gamebg.appendChild(oDiv);
+						document.onmousemove = function(ev){
+							oDiv.style.left = ev.pageX - bg.offsetLeft - 71 + 'px';
+							oDiv.style.top = ev.pageY - bg.offsetTop -61 + 'px';
+						}
+						document.onmouseup = function(){
+							if(parseFloat(oDiv.style.left)>500){
+								myimg.src = 'img/'+this.i+'.png';
+							}
+							if(oDiv.parentNode)gamebg.removeChild(oDiv);
+							document.onmousemove = null ;
+							document.onmouseup = null ;
+						}.bind(this)
+						return false;
+					}
+				
+				}
+			}();
+			
+			
+			
+		</script>
+	</body>
+
+</html>
